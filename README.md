@@ -54,3 +54,4 @@ curl -X 'POST' \
   -F 'model=mlx-community/whisper-tiny-mlx'
 ```
 
+![screenshot](./assets/example1.jpg)
