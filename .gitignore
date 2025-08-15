@@ -2,3 +2,4 @@
 .aider*
 /__pycache__
 *.txt
+audio_recordings/
