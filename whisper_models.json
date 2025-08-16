@@ -1,0 +1,31 @@
+{
+    "models": [
+        {
+            "id": "mlx-community/whisper-tiny-mlx",
+            "description": "Fastest, least accurate"
+        },
+        {
+            "id": "mlx-community/whisper-base-mlx",
+            "description": "Balanced speed/accuracy"
+        },
+        {
+            "id": "mlx-community/whisper-small-mlx",
+            "description": "Better accuracy, slower"
+        },
+        {
+            "id": "mlx-community/whisper-medium.en-mlx-4bit",
+            "description": "Medium model, English-only, 4-bit quantized"
+        },
+        {
+            "id": "mlx-community/whisper-turbo",
+            "description": "Fast and efficient Whisper Turbo model"
+        },
+        {
+            "id": "mlx-community/whisper-large-v3-mlx",
+            "description": "Largest, most accurate model"
+        }
+    ],
+    "info": {
+        "source": "For more models and information, check out: https://huggingface.co/collections/mlx-community/whisper-663256f9964fbb1177db93dc"
+    }
+}

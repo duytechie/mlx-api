@@ -1,6 +1,7 @@
 from fastapi import FastAPI, UploadFile, Form, HTTPException
 import mlx_whisper
 import os
+import json
 
 app = FastAPI()
 
@@ -10,27 +11,17 @@ async def root():
     return {"message": "MLX Transcription API", "version": "1.0.0", "docs": "/docs"}
 
 
-whisper_models = {
-    "models": [
-        {
-            "id": "mlx-community/whisper-tiny-mlx",
-            "description": "Fastest, least accurate",
-        },
-        {
-            "id": "mlx-community/whisper-base-mlx",
-            "description": "Balanced speed/accuracy",
-        },
-        {
-            "id": "mlx-community/whisper-small-mlx",
-            "description": "Better accuracy, slower",
-        },
-    ]
-}
-
-
+# Get the list of compatible models
 @app.get("/v1/models")
 async def list_models():
-    return whisper_models
+    try:
+        with open("whisper_models.json", "r") as file:
+            whisper_models = json.load(file)
+        return whisper_models
+    except FileNotFoundError:
+        raise HTTPException(status_code=500, detail="List of models not found")
+    except json.JSONDecodeError:
+        raise HTTPException(status_code=500, detail="Invalid json configuration")
 
 
 @app.post("/v1/audio/transcriptions")
@@ -45,7 +36,6 @@ async def transcribe_audio(file: UploadFile, model: str = Form(...)):
         ".m4a",
         ".wav",
         ".webm",
-        ".ogg",
     )
     if not file.filename.lower().endswith(supported_formats):
         raise HTTPException(status_code=400, detail="File must be an audio file")
@@ -59,11 +49,12 @@ async def transcribe_audio(file: UploadFile, model: str = Form(...)):
         result = mlx_whisper.transcribe(
             audio=temp_file_path, path_or_hf_repo=model, word_timestamps=True
         )
-        return {"text": result["text"]}
+        # return {"text": result["text"]}
+        # Return the complete result from the transcription
+        return result
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         if os.path.exists(temp_file_path):
             os.remove(temp_file_path)
-

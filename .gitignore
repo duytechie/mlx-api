@@ -1,5 +1,11 @@
+# OS files
 .DS_Store
-.aider*
-/__pycache__
 *.txt
 audio_recordings/
+
+# AI stuff
+.aider*
+.cursor/
+
+# Python
+/__pycache__
