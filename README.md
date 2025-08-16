@@ -9,49 +9,70 @@ git clone https://github.com/duytechie/mlx-api.git
 cd mlx-api
 ```
 
-### 2. Install `uv` and `ffmpeg` (if not already installed)
+### 2. Install required dependencies
 
-- Install `uv`
+You'll need two tools: `uv` (Python package manager) and `ffmpeg` (audio processing).
+
+Install `uv`
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-- Install `ffmpeg`
+Install `ffmpeg`
 
 ```bash
 brew install ffmpeg
 ```
 
-### 3. Install necessary packages
+### 3. Install Python dependencies
+
+This command will install all the necessary Python packages listed in the project configuration.
 
 ```bash
 uv sync
 ```
 
-### 4. Run the local server
+
+### 4. Start the local API server
 
 ```bash
 uv run main.py
 ```
 
-### 5. Usage
+## Usage
 
-API Enpoints:
+### API Enpoints:
 
 - `POST /v1/audio/transcriptions`: Upload audio file for transcription
 - `GET /v1/models`: List all models
 
-Check the `docs` on `localhost:8000/docs`
+### Interactive Documentation
 
-## Example
+Visit `/docs` in your browser to see the interactive API documentation.
+
+![docs](./assets/docs.jpg)
+
+## Examples
+
+### Using `curl`
 
 ```bash
 curl -X 'POST' \
   'http://localhost:8000/v1/audio/transcriptions' \
   -H 'Content-Type: multipart/form-data' \
-  -F 'file=@/audio.mp3' \
+  -F 'file=@/path/to/your/audio.mp3' \
   -F 'model=mlx-community/whisper-tiny-mlx'
 ```
 
-![screenshot](./assets/example1.jpg)
+**Note:** Replace `/path/to/your/audio.mp3` with the actual path to your audio file.
+
+![curl_example](./assets/example1.jpg)
+
+### Using `Postman`
+
+![postman_example](./assets/example2.jpg)
+
+### Using `/docs`
+
+![docs_example](./assets/example3.jpg)
