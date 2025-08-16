@@ -1,5 +1,7 @@
 # MLX Whisper API
 
+A fast and efficient audio transcription API powered by Apple's MLX framework and OpenAI's Whisper models. This API server provides OpenAI-compatible endpoints for converting speech to text, optimized for Apple Silicon Macs.
+
 ## Installation
 
 ### 1. Clone the repository
